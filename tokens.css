@@ -142,7 +142,7 @@ html, body {
 }
 
 body {
-  background: #2A2A24;             /* moldura escura ao redor do celular (desktop) */
+  background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
   font-size: var(--fs-base);

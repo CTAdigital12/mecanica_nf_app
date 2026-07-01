@@ -14,26 +14,66 @@
    Fonte da verdade do protótipo (fase conceito).
    ============================================================ */
 
-/* ---- moldura do celular ---- */
+/* ---- shell responsivo ----
+   Celular: coluna única, tela cheia, nav embaixo.
+   Desktop: menu lateral + área de conteúdo larga. */
 .device {
   position: relative;
   width: 100%;
-  max-width: var(--device-w);
   min-height: 100vh;
-  margin: 0 auto;
+  min-height: 100dvh;
   background: var(--bg);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
-@media (min-width: 480px) {
-  body { padding: 24px 0; }
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* ---- menu lateral (só desktop) ---- */
+.sidebar { display: none; }
+
+@media (min-width: 900px) {
   .device {
-    min-height: 880px;
-    height: 880px;
-    border-radius: 36px;
-    box-shadow: var(--shadow-lg), 0 0 0 10px #14140F, 0 0 0 12px #3a3a30;
+    display: grid;
+    grid-template-columns: 264px minmax(0, 1fr);
+    height: 100vh;
+    height: 100dvh;
   }
+  .device.no-shell { grid-template-columns: minmax(0, 1fr); }
+  .device.no-shell .sidebar { display: none; }
+
+  .sidebar {
+    display: flex; flex-direction: column;
+    background: var(--surface); border-right: 1px solid var(--border);
+    padding: var(--space-4) var(--space-3); gap: 4px; overflow-y: auto;
+  }
+  .sidebar .s-brand { display: flex; align-items: center; gap: 10px; padding: var(--space-2) var(--space-3) var(--space-5); font-weight: var(--fw-bold); font-size: var(--fs-md); }
+  .sidebar .s-brand .logo { width: 36px; height: 36px; border-radius: 10px; background: var(--amber); color: var(--on-amber); display: grid; place-items: center; font-weight: 800; }
+  .sidebar .s-item {
+    display: flex; align-items: center; gap: 12px; padding: 12px var(--space-3);
+    border: 0; background: transparent; border-radius: var(--radius-md); cursor: pointer;
+    font-size: var(--fs-md); font-weight: var(--fw-medium); color: var(--fg-muted); text-align: left; width: 100%;
+    min-height: 48px;
+  }
+  .sidebar .s-item .ic { font-size: 22px; width: 26px; text-align: center; }
+  .sidebar .s-item:hover { background: var(--surface-2); }
+  .sidebar .s-item.active { background: var(--green-soft); color: var(--green); font-weight: var(--fw-semibold); }
+  .sidebar .s-item.s-emit { background: var(--amber); color: var(--on-amber); font-weight: var(--fw-semibold); margin: 6px 0; }
+  .sidebar .s-item.s-emit:hover { background: var(--amber-hover); }
+  .sidebar .s-badge { margin-left: auto; }
+  .sidebar .s-spacer { flex: 1; }
+  .sidebar .s-user { display: flex; align-items: center; gap: 10px; padding: var(--space-3); border-top: 1px solid var(--border); margin-top: var(--space-3); }
+  .sidebar .s-user .av { width: 38px; height: 38px; border-radius: 50%; background: var(--green-soft); color: var(--green); display: grid; place-items: center; font-size: 20px; }
+  .sidebar .s-user .nm { font-size: var(--fs-sm); font-weight: var(--fw-semibold); }
+  .sidebar .s-user .rl { font-size: var(--fs-xs); color: var(--fg-dim); }
+
+  .main { height: 100vh; height: 100dvh; overflow: hidden; }
+  .bottomnav { display: none !important; }
 }
 
 /* ---- barra superior ---- */
@@ -56,6 +96,17 @@
 }
 .topbar .title { font-weight: var(--fw-semibold); font-size: var(--fs-lg); }
 .topbar .spacer { flex: 1; }
+/* mobile: marca na home, título nas outras */
+.topbar .title { display: none; }
+.device[data-home="false"] .topbar .brand { display: none; }
+.device[data-home="false"] .topbar .title { display: inline; }
+/* login: sem topbar (a tela tem o próprio logo) */
+.device[data-screen="login"] .topbar { display: none; }
+@media (min-width: 900px) {
+  /* desktop: marca vive na sidebar; topbar só título */
+  .topbar .brand { display: none !important; }
+  .device:not([data-screen="login"]) .topbar .title { display: inline !important; }
+}
 .topbar .icon-btn {
   width: 44px; height: 44px; border: 0; background: transparent; color: #fff;
   border-radius: var(--radius-md); display: grid; place-items: center; cursor: pointer; font-size: 20px; position: relative;
@@ -73,6 +124,21 @@
 .screen.active { display: block; }
 .screen.no-nav { padding-bottom: var(--space-7); }
 @keyframes fade { from { opacity: 0; transform: translateY(6px);} to {opacity:1; transform:none;} }
+
+@media (min-width: 900px) {
+  /* conteúdo numa coluna confortável e centralizada */
+  .screen { padding: var(--space-7) var(--space-7) var(--space-8); max-width: 860px; margin: 0 auto; }
+  .screen.no-nav { padding-bottom: var(--space-8); }
+  /* telas focadas (login, wizard) centralizadas e mais estreitas */
+  .device.no-shell .screen { max-width: 560px; }
+  /* mais colunas onde faz sentido */
+  .action-grid { grid-template-columns: repeat(3, 1fr); }
+  .product-grid { grid-template-columns: repeat(4, 1fr); }
+  .kpi-row { max-width: 640px; }
+}
+@media (min-width: 1200px) {
+  .screen { max-width: 1040px; }
+}
 
 /* ---- navegação inferior ---- */
 .bottomnav {
@@ -319,6 +385,23 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
 <div class="device" id="app">
   <span class="demo-flag">WIREFRAME</span>
 
+  <!-- ===================== SIDEBAR (desktop) ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="s-brand"><span class="logo">MNF</span> Mecânica Nota Fácil</div>
+    <button class="s-item" data-navfor="home" onclick="nav('home')"><span class="ic">🏠</span> Início</button>
+    <button class="s-item s-emit" onclick="nav('emitirTipo')"><span class="ic">🧾</span> Emitir nota</button>
+    <button class="s-item" data-navfor="notas" onclick="nav('notas')"><span class="ic">📂</span> Minhas notas</button>
+    <button class="s-item" data-navfor="clientes" onclick="nav('clientes')"><span class="ic">👨‍🌾</span> Clientes</button>
+    <button class="s-item" data-navfor="manutencao" onclick="nav('manutencao')"><span class="ic">🔧</span> Manutenções <span class="s-badge badge-count">3</span></button>
+    <button class="s-item" data-navfor="loja" onclick="nav('loja')"><span class="ic">🛒</span> Loja de peças</button>
+    <button class="s-item" data-navfor="mural" onclick="nav('mural')"><span class="ic">📣</span> Mural <span class="s-badge badge-count">2</span></button>
+    <span class="s-spacer"></span>
+    <div class="s-user"><span class="av">👷</span><div><div class="nm">Seu Zé Mecânica</div><div class="rl">MEI · Raizhe demo</div></div></div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <div class="main">
+
   <!-- ===================== TOPBAR ===================== -->
   <header class="topbar" id="topbar">
     <button class="icon-btn back" id="backBtn" style="display:none" onclick="goBack()" aria-label="Voltar">‹</button>
@@ -326,7 +409,7 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
       <span class="logo">MNF</span>
       <span>Mecânica Nota Fácil</span>
     </div>
-    <span class="title" id="topTitle" style="display:none"></span>
+    <span class="title" id="topTitle"></span>
     <span class="spacer"></span>
     <button class="icon-btn dot-badge" onclick="nav('notificacoes')" aria-label="Avisos">🔔</button>
   </header>
@@ -654,6 +737,8 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
     <button data-navfor="manutencao" onclick="nav('manutencao')"><span class="ic">🔧</span> Manut.</button>
     <button data-navfor="loja" onclick="nav('loja')"><span class="ic">🛒</span> Loja</button>
   </nav>
+
+  </div><!-- /main -->
 </div>
 
 <script>
@@ -682,24 +767,24 @@ let history = ['login'];
 
 function nav(name, push = true) {
   const cfg = SCREENS[name] || {};
+  const app = document.getElementById('app');
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.dataset.screen === name));
   document.getElementById('screenWrap').scrollTop = 0;
 
-  // topbar
-  const back = document.getElementById('backBtn');
-  const brand = document.getElementById('brandBlock');
-  const title = document.getElementById('topTitle');
-  if (name === 'home' || name === 'login') {
-    brand.style.display = 'flex'; title.style.display = 'none';
-  } else {
-    brand.style.display = 'none'; title.style.display = 'inline';
-    title.textContent = cfg.title || '';
-  }
-  back.style.display = cfg.back ? 'grid' : 'none';
+  // estado do shell (dirige o CSS responsivo)
+  app.dataset.screen = name;
+  app.dataset.home = (name === 'home') ? 'true' : 'false';
+  app.classList.toggle('no-shell', name === 'login' || name === 'semCnpj');
 
-  // bottom nav
+  // topbar
+  document.getElementById('topTitle').textContent = cfg.title || 'Início';
+  document.getElementById('backBtn').style.display = cfg.back ? 'grid' : 'none';
+
+  // nav de baixo (mobile) escondida em telas de fluxo focado
   document.getElementById('bottomnav').style.display = cfg.nav ? 'flex' : 'none';
-  document.querySelectorAll('.bottomnav [data-navfor]').forEach(b =>
+
+  // estado ativo nos dois menus (baixo + lateral)
+  document.querySelectorAll('[data-navfor]').forEach(b =>
     b.classList.toggle('active', b.dataset.navfor === name));
 
   if (push) { if (history[history.length-1] !== name) history.push(name); }
