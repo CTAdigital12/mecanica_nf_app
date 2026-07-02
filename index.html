@@ -411,28 +411,29 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
     <div class="s-brand"><span class="logo">DP</span> Dispace</div>
 
     <div class="modeseg full" role="tablist">
-      <button data-mode="mec"  onclick="setMode('mec')">Mecânico</button>
+      <button data-mode="mec"  onclick="setMode('mec')">Cliente</button>
       <button data-mode="disp" onclick="setMode('disp')">Dispace</button>
     </div>
 
-    <!-- ==== navegação: lado do mecânico (cliente) ==== -->
+    <!-- ==== navegação: lado da Dispace (admin + comercial) — principal ==== -->
+    <button class="s-item" data-mode-nav="disp" data-navfor="dispHome" onclick="nav('dispHome')"><span class="ic">📊</span> Painel</button>
+    <button class="s-item s-emit" data-mode-nav="disp" data-navfor="dispRadar" onclick="nav('dispRadar')"><span class="ic">🛰️</span> Radar de vida útil <span class="s-badge badge-count">12</span></button>
+    <button class="s-item" data-mode-nav="disp" data-navfor="dispProdutos" onclick="nav('dispProdutos')"><span class="ic">📦</span> Produtos (loja)</button>
+    <button class="s-item" data-mode-nav="disp" data-navfor="dispPedidos" onclick="nav('dispPedidos')"><span class="ic">🧾</span> Pedidos <span class="s-badge badge-count">5</span></button>
+    <button class="s-item" data-mode-nav="disp" data-navfor="dispClientes" onclick="nav('dispClientes')"><span class="ic">🧑‍🔧</span> Clientes</button>
+    <button class="s-item" data-mode-nav="disp" data-navfor="dispMural" onclick="nav('dispMural')"><span class="ic">📣</span> Mural (publicar)</button>
+
+    <!-- ==== navegação: lado do mecânico (cliente Dispace) — enxuto ==== -->
     <button class="s-item" data-mode-nav="mec" data-navfor="home" onclick="nav('home')"><span class="ic">🏠</span> Início</button>
     <button class="s-item s-emit" data-mode-nav="mec" onclick="nav('emitirTipo')"><span class="ic">🧾</span> Emitir nota</button>
     <button class="s-item" data-mode-nav="mec" data-navfor="notas" onclick="nav('notas')"><span class="ic">📂</span> Minhas notas</button>
-    <button class="s-item" data-mode-nav="mec" data-navfor="clientes" onclick="nav('clientes')"><span class="ic">👨‍🌾</span> Clientes</button>
-    <button class="s-item" data-mode-nav="mec" data-navfor="manutencao" onclick="nav('manutencao')"><span class="ic">🔧</span> Manutenções <span class="s-badge badge-count">3</span></button>
+    <button class="s-item" data-mode-nav="mec" data-navfor="clientes" onclick="nav('clientes')"><span class="ic">👨‍🌾</span> Meus clientes</button>
     <button class="s-item" data-mode-nav="mec" data-navfor="loja" onclick="nav('loja')"><span class="ic">🛒</span> Loja Dispace</button>
     <button class="s-item" data-mode-nav="mec" data-navfor="mural" onclick="nav('mural')"><span class="ic">📣</span> Mural <span class="s-badge badge-count">2</span></button>
 
-    <!-- ==== navegação: lado da Dispace (comercial) ==== -->
-    <button class="s-item" data-mode-nav="disp" data-navfor="dispHome" onclick="nav('dispHome')"><span class="ic">📊</span> Painel</button>
-    <button class="s-item s-emit" data-mode-nav="disp" data-navfor="dispRadar" onclick="nav('dispRadar')"><span class="ic">🛰️</span> Radar de vida útil <span class="s-badge badge-count">12</span></button>
-    <button class="s-item" data-mode-nav="disp" data-navfor="dispCatalogo" onclick="nav('dispCatalogo')"><span class="ic">📦</span> Catálogo (Protheus)</button>
-    <button class="s-item" data-mode-nav="disp" data-navfor="dispClientes" onclick="nav('dispClientes')"><span class="ic">🧑‍🔧</span> Clientes mecânicos</button>
-
     <span class="s-spacer"></span>
-    <div class="s-user" data-mode-nav="mec"><span class="av">👷</span><div><div class="nm">Seu Zé Mecânica</div><div class="rl">Cliente Dispace · MEI</div></div></div>
-    <div class="s-user" data-mode-nav="disp"><span class="av">💼</span><div><div class="nm">Ana · Comercial</div><div class="rl">Dispace · vendas</div></div></div>
+    <div class="s-user" data-mode-nav="disp"><span class="av">💼</span><div><div class="nm">Ana · Comercial</div><div class="rl">Dispace · admin</div></div></div>
+    <div class="s-user" data-mode-nav="mec"><span class="av">👷</span><div><div class="nm">Seu Zé</div><div class="rl">Cliente Dispace · MEI</div></div></div>
   </aside>
 
   <!-- ===================== MAIN ===================== -->
@@ -454,7 +455,7 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
   <!-- barra de modo (mobile) -->
   <div class="modebar" id="modebar">
     <div class="modeseg" role="tablist">
-      <button data-mode="mec"  onclick="setMode('mec')">Mecânico</button>
+      <button data-mode="mec"  onclick="setMode('mec')">Cliente</button>
       <button data-mode="disp" onclick="setMode('disp')">Dispace comercial</button>
     </div>
   </div>
@@ -474,17 +475,13 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
       <span class="ic">🧪</span>
       <div class="body">
         <div class="t">Modo demonstração</div>
-        <div class="s">Entre como mecânico (cliente Dispace). Lá dentro dá pra alternar pra visão da Dispace comercial.</div>
+        <div class="s">Escolha por onde entrar. Dá pra alternar entre as duas visões a qualquer momento.</div>
       </div>
     </div>
 
-    <div class="field">
-      <label>Seu CNPJ (mecânico cliente)</label>
-      <input type="text" value="12.345.678/0001-90" inputmode="numeric">
-      <div class="hint">CNPJ de teste do wireframe.</div>
-    </div>
-    <button class="btn btn-primary" onclick="login()"><span class="ic">→</span> Entrar</button>
-    <button class="btn btn-ghost mt4" onclick="nav('semCnpj')"><span class="ic">❓</span> Ainda não tenho CNPJ</button>
+    <button class="btn btn-primary" style="min-height:60px;font-size:var(--fs-md)" onclick="enter('disp')"><span class="ic">💼</span> Entrar como Dispace (admin)</button>
+    <button class="btn btn-green mt4" style="min-height:60px;font-size:var(--fs-md)" onclick="enter('mec')"><span class="ic">👷</span> Entrar como Cliente</button>
+    <button class="btn btn-ghost mt4" onclick="nav('semCnpj')"><span class="ic">❓</span> Sou mecânico e ainda não tenho CNPJ</button>
 
     <p class="wf-note">Protótipo navegável. Nenhuma nota é emitida de verdade.</p>
   </section>
@@ -493,25 +490,19 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
   <section class="screen no-nav" data-screen="semCnpj">
     <h1 class="page">Vamos te ajudar a virar MEI</h1>
     <p class="page-sub">Sem CNPJ não dá pra emitir nota. Mas dá pra resolver rápido e de graça.</p>
-    <div class="card"><div style="display:flex;gap:12px"><span style="font-size:26px">📋</span><div><div style="font-weight:600">1. Abrir o MEI</div><div class="muted" style="font-size:var(--fs-sm)">Gratuito, no Portal do Empreendedor. Leva uns 15 minutos.</div></div></div></div>
+    <div class="card"><div style="display:flex;gap:12px"><span style="font-size:26px">📋</span><div><div style="font-weight:600">1. Abrir o MEI</div><div class="muted" style="font-size:var(--fs-sm)">Gratuito, no site do governo (Portal do Empreendedor). Leva uns 15 minutos.</div></div></div></div>
     <div class="card"><div style="display:flex;gap:12px"><span style="font-size:26px">🔑</span><div><div style="font-weight:600">2. Conta Gov.br nível prata</div><div class="muted" style="font-size:var(--fs-sm)">Necessária para emitir a nota com segurança.</div></div></div></div>
     <div class="card"><div style="display:flex;gap:12px"><span style="font-size:26px">✅</span><div><div style="font-weight:600">3. Voltar aqui e começar</div><div class="muted" style="font-size:var(--fs-sm)">A gente cuida do resto.</div></div></div></div>
-    <div class="action-bar"><button class="btn btn-ghost" onclick="nav('login')"><span class="ic">‹</span> Voltar</button></div>
+    <div class="action-bar">
+      <a class="btn btn-primary" href="https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/quero-ser-mei" target="_blank" rel="noopener" style="text-decoration:none"><span class="ic">🏛️</span> Abrir meu MEI no site do governo</a>
+      <button class="btn btn-ghost mt4" onclick="nav('login')"><span class="ic">‹</span> Voltar</button>
+    </div>
   </section>
 
   <!-- ===== HOME ===== -->
   <section class="screen" data-screen="home">
     <p class="label">Bom dia,</p>
-    <h1 class="page" style="margin-top:2px">Seu Zé Mecânica</h1>
-
-    <div class="banner banner-warn mt2" onclick="nav('manutencao')" style="cursor:pointer; margin-bottom: var(--space-5)">
-      <span class="ic">🛠️</span>
-      <div class="body">
-        <div class="t">3 manutenções a vencer</div>
-        <div class="s">Avise seus clientes antes que a máquina pare. Toque para ver.</div>
-      </div>
-      <span style="font-size:22px;color:var(--warn)">›</span>
-    </div>
+    <h1 class="page" style="margin-top:2px">Seu Zé</h1>
 
     <button class="btn btn-primary" style="min-height:64px;font-size:var(--fs-lg)" onclick="nav('emitirTipo')">
       <span class="ic">🧾</span> Emitir nota agora
@@ -521,9 +512,8 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
     <div class="action-grid">
       <button class="action-tile" onclick="nav('notas')"><span class="ic">📂</span><span class="ttl">Minhas notas</span><span class="sub">Emitidas e de compra</span></button>
       <button class="action-tile" onclick="nav('clientes')"><span class="ic">👨‍🌾</span><span class="ttl">Meus clientes</span><span class="sub">8 cadastrados</span></button>
-      <button class="action-tile" onclick="nav('manutencao')"><span class="ic">🔧</span><span class="ttl">Manutenções</span><span class="sub">3 a vencer</span><span class="badge-count" style="position:absolute;top:12px;right:12px">3</span></button>
-      <button class="action-tile" onclick="nav('loja')"><span class="ic">🛒</span><span class="ttl">Loja de peças</span><span class="sub">Comprar com a Agro Peças</span></button>
-      <button class="action-tile span2" onclick="nav('mural')"><span class="ic">📣</span><div><span class="ttl">Mural de avisos</span><div class="sub">2 ofertas novas da Agro Peças</div></div><span class="badge-count">2</span></button>
+      <button class="action-tile" onclick="nav('loja')"><span class="ic">🛒</span><span class="ttl">Loja Dispace</span><span class="sub">Peças originais</span></button>
+      <button class="action-tile" onclick="nav('mural')"><span class="ic">📣</span><span class="ttl">Mural</span><span class="sub">2 ofertas novas</span><span class="badge-count" style="position:absolute;top:12px;right:12px">2</span></button>
     </div>
 
     <div class="section-title">Este mês</div>
@@ -650,9 +640,9 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
     </div>
 
     <div data-tab="notas-recebidas" style="display:none">
-      <div class="banner banner-info" style="margin-bottom:var(--space-4)"><span class="ic">📥</span><div class="body"><div class="t">Notas das peças que você comprou</div><div class="s">Chegam direto da Agro Peças quando você compra na loja.</div></div></div>
-      <div class="list-item"><div class="avatar amber">📦</div><div class="body"><div class="t1">Agro Peças Ltda</div><div class="t2">NF-e 4471 · 3 itens · 20/jun</div></div><div class="end"><div class="val num">R$ 410</div><span class="chip chip-green" style="margin-top:4px">✓ Recebida</span></div></div>
-      <div class="list-item"><div class="avatar amber">📦</div><div class="body"><div class="t1">Agro Peças Ltda</div><div class="t2">NF-e 4388 · 5 itens · 08/jun</div></div><div class="end"><div class="val num">R$ 730</div><span class="chip chip-green" style="margin-top:4px">✓ Recebida</span></div></div>
+      <div class="banner banner-info" style="margin-bottom:var(--space-4)"><span class="ic">📥</span><div class="body"><div class="t">Notas das peças que você comprou</div><div class="s">Chegam direto da Dispace quando você compra na loja.</div></div></div>
+      <div class="list-item"><div class="avatar amber">📦</div><div class="body"><div class="t1">Dispace Ltda</div><div class="t2">NF-e 4471 · 3 itens · 20/jun</div></div><div class="end"><div class="val num">R$ 410</div><span class="chip chip-green" style="margin-top:4px">✓ Recebida</span></div></div>
+      <div class="list-item"><div class="avatar amber">📦</div><div class="body"><div class="t1">Dispace Ltda</div><div class="t2">NF-e 4388 · 5 itens · 08/jun</div></div><div class="end"><div class="val num">R$ 730</div><span class="chip chip-green" style="margin-top:4px">✓ Recebida</span></div></div>
     </div>
   </section>
 
@@ -691,35 +681,7 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
     </div>
   </section>
 
-  <!-- ===== MANUTENÇÃO ===== -->
-  <section class="screen" data-screen="manutencao">
-    <h1 class="page">Manutenções</h1>
-    <p class="page-sub">Avise o cliente antes da máquina parar. Mais serviço pra você.</p>
-
-    <div class="tabs">
-      <button class="active" onclick="switchTab(this,'man-vencer')">A vencer</button>
-      <button onclick="switchTab(this,'man-ok')">Em dia</button>
-    </div>
-
-    <div data-tab="man-vencer">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:start"><div><div style="font-weight:600;font-size:var(--fs-md)">Corrente da motosserra</div><div class="muted" style="font-size:var(--fs-sm)">Antônio (Tonho) · Chácara do Tonho</div></div><span class="chip chip-danger">vencida</span></div>
-        <button class="btn btn-primary mt4" style="min-height:48px"><span class="ic">📲</span> Avisar o cliente</button>
-      </div>
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:start"><div><div style="font-weight:600;font-size:var(--fs-md)">Corrente da motosserra</div><div class="muted" style="font-size:var(--fs-sm)">João Pereira · Sítio Boa Esperança</div></div><span class="chip chip-warn">~9 dias</span></div>
-        <button class="btn btn-primary mt4" style="min-height:48px"><span class="ic">📲</span> Avisar o cliente</button>
-      </div>
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:start"><div><div style="font-weight:600;font-size:var(--fs-md)">Filtro de ar da roçadeira</div><div class="muted" style="font-size:var(--fs-sm)">Maria Souza · Fazenda Santa Rita</div></div><span class="chip chip-warn">~14 dias</span></div>
-        <button class="btn btn-primary mt4" style="min-height:48px"><span class="ic">📲</span> Avisar o cliente</button>
-      </div>
-    </div>
-
-    <div data-tab="man-ok" style="display:none">
-      <div class="empty"><div class="ic">✅</div><div class="t">Tudo em dia por aqui</div><div class="s">As máquinas com peças novas aparecem nesta aba.</div></div>
-    </div>
-  </section>
+  <!-- (a antiga página "Manutenções" do mecânico foi movida pro Radar de vida útil da Dispace) -->
 
   <!-- ===== LOJA ===== -->
   <section class="screen" data-screen="loja">
@@ -743,23 +705,23 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
   <!-- ===== MURAL ===== -->
   <section class="screen" data-screen="mural">
     <h1 class="page">Mural de avisos</h1>
-    <p class="page-sub">Recados e ofertas da Agro Peças</p>
+    <p class="page-sub">Recados e ofertas da Dispace</p>
 
     <div class="post">
       <div class="cover amber">Promoção: correntes com 20% OFF</div>
       <div class="pbody">
-        <div class="who"><span>🏢</span> Agro Peças Ltda · hoje</div>
+        <div class="who"><span>🏢</span> Dispace Ltda · hoje</div>
         <p>Só esta semana: toda linha de correntes Husqvarna com 20% de desconto. Aproveite e já deixe estoque na oficina.</p>
-        <button class="btn btn-primary"><span class="ic">🛒</span> Ver na loja</button>
+        <button class="btn btn-primary" onclick="nav('loja')"><span class="ic">🛒</span> Ver corrente na loja</button>
       </div>
     </div>
 
     <div class="post">
       <div class="cover">Chegou: robô Automower 2026</div>
       <div class="pbody">
-        <div class="who"><span>🏢</span> Agro Peças Ltda · 2 dias</div>
+        <div class="who"><span>🏢</span> Dispace Ltda · 2 dias</div>
         <p>Novo robô cortador com mais autonomia. Vire revendedor e ganhe comissão indicando pros seus clientes.</p>
-        <button class="btn btn-ghost"><span class="ic">📖</span> Saber mais</button>
+        <button class="btn btn-primary" onclick="nav('loja')"><span class="ic">🛒</span> Ver na loja</button>
       </div>
     </div>
   </section>
@@ -769,7 +731,7 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
     <h1 class="page">Avisos</h1>
     <div class="list-item"><div class="avatar amber">🛠️</div><div class="body"><div class="t1">Manutenção a vencer</div><div class="t2">Corrente do João vence em ~9 dias</div></div></div>
     <div class="list-item"><div class="avatar">📣</div><div class="body"><div class="t1">Nova oferta no mural</div><div class="t2">Correntes com 20% OFF</div></div></div>
-    <div class="list-item"><div class="avatar">📥</div><div class="body"><div class="t1">Nota de compra recebida</div><div class="t2">NF-e 4471 da Agro Peças</div></div></div>
+    <div class="list-item"><div class="avatar">📥</div><div class="body"><div class="t1">Nota de compra recebida</div><div class="t2">NF-e 4471 da Dispace</div></div></div>
     <div class="list-item"><div class="avatar amber">⏳</div><div class="body"><div class="t1">Nota pendente de envio</div><div class="t2">Carlos Lima · sem sinal, vai transmitir sozinha</div></div></div>
   </section>
 
@@ -800,7 +762,7 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
     </div>
 
     <div class="section-title">Fila de hoje</div>
-    <div class="list-item" onclick="nav('dispRadar')"><div class="avatar amber">🔗</div><div class="body"><div class="t1">Corrente H30 · ponto de troca</div><div class="t2">Zé Mecânica → motosserra do Sítio Boa Esperança</div></div><span class="chev">›</span></div>
+    <div class="list-item" onclick="nav('dispRadar')"><div class="avatar amber">🔗</div><div class="body"><div class="t1">Corrente H30 · ponto de troca</div><div class="t2">Seu Zé → motosserra do Sítio Boa Esperança</div></div><span class="chev">›</span></div>
     <div class="list-item" onclick="nav('dispRadar')"><div class="avatar amber">🗡️</div><div class="body"><div class="t1">Sabre 18" · fim de vida</div><div class="t2">Oficina do Carlos → cliente final</div></div><span class="chev">›</span></div>
   </section>
 
@@ -822,12 +784,12 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
           <span class="chip chip-warn">ponto de troca</span>
         </div>
         <div class="life"><div class="life-bar"><span style="width:92%;background:var(--warn)"></span></div><div class="life-meta"><span>92% da vida útil estimada</span><span style="color:var(--warn);font-weight:600">~1 corrente restante</span></div></div>
-        <div class="muted mt2" style="font-size:var(--fs-sm)">Cliente: <strong>Zé Mecânica</strong> · máquina final: motosserra do Sítio Boa Esperança</div>
+        <div class="muted mt2" style="font-size:var(--fs-sm)">Cliente: <strong>Seu Zé</strong> · máquina final: motosserra do Sítio Boa Esperança</div>
         <div class="btn-row mt4">
           <button class="btn btn-primary" style="min-height:48px"><span class="ic">📲</span> WhatsApp</button>
           <button class="btn btn-ghost" style="min-height:48px"><span class="ic">📞</span> Ligar</button>
         </div>
-        <button class="btn btn-green mt4" style="min-height:48px"><span class="ic">🛒</span> Oferecer troca (montar pedido)</button>
+        <button class="btn btn-green mt4" style="min-height:48px" onclick="nav('dispPedidos')"><span class="ic">🛒</span> Oferecer troca (montar pedido)</button>
       </div>
 
       <div class="card">
@@ -841,12 +803,12 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
           <button class="btn btn-primary" style="min-height:48px"><span class="ic">📲</span> WhatsApp</button>
           <button class="btn btn-ghost" style="min-height:48px"><span class="ic">📞</span> Ligar</button>
         </div>
-        <button class="btn btn-green mt4" style="min-height:48px"><span class="ic">🛒</span> Oferecer troca (montar pedido)</button>
+        <button class="btn btn-green mt4" style="min-height:48px" onclick="nav('dispPedidos')"><span class="ic">🛒</span> Oferecer troca (montar pedido)</button>
       </div>
     </div>
 
     <div data-tab="rad-uso" style="display:none">
-      <div class="list-item"><div class="avatar">🌀</div><div class="body"><div class="t1">Filtro de ar FS</div><div class="t2">Zé Mecânica · 40% da vida</div></div><span class="chip chip-green">em uso</span></div>
+      <div class="list-item"><div class="avatar">🌀</div><div class="body"><div class="t1">Filtro de ar FS</div><div class="t2">Seu Zé · 40% da vida</div></div><span class="chip chip-green">em uso</span></div>
       <div class="list-item"><div class="avatar">🔌</div><div class="body"><div class="t1">Vela NGK</div><div class="t2">Maria Souza · 55% da vida</div></div><span class="chip chip-green">em uso</span></div>
     </div>
 
@@ -862,47 +824,120 @@ hr.div { border: 0; border-top: 1px solid var(--border); margin: var(--space-5) 
     </div>
   </section>
 
-  <!-- ===== DISPACE · CATÁLOGO (PROTHEUS) ===== -->
-  <section class="screen" data-screen="dispCatalogo">
-    <h1 class="page">Catálogo</h1>
-    <p class="page-sub">Produtos, estoque e preço vindos do Protheus</p>
+  <!-- ===== DISPACE · PRODUTOS (loja admin, Protheus) ===== -->
+  <section class="screen" data-screen="dispProdutos">
+    <h1 class="page">Produtos</h1>
+    <p class="page-sub">Loja da Dispace · edite preço, estoque e canais</p>
     <div style="margin-bottom:var(--space-4)"><span class="sync-chip"><span class="dot"></span> Protheus sincronizado · há 5 min</span></div>
 
-    <div class="banner banner-info" style="margin-bottom:var(--space-4)"><span class="ic">🔗</span><div class="body"><div class="t">Antes: só Mercado Livre</div><div class="s">Agora o mesmo estoque do Protheus abastece a loja própria e o marketplace, sem recadastrar.</div></div></div>
+    <div class="banner banner-info" style="margin-bottom:var(--space-4)"><span class="ic">🔗</span><div class="body"><div class="t">Antes: só Mercado Livre</div><div class="s">O mesmo cadastro do Protheus abastece a loja própria e o ML. Editou aqui, atualiza nos dois.</div></div></div>
 
-    <div class="list-item"><div class="avatar amber">🔗</div><div class="body"><div class="t1">Corrente Husqvarna H30 · 18"</div><div class="t2 num">SKU 100245 · 12 un</div></div><div class="end"><div class="val num">R$ 95</div><span class="chip chip-green" style="margin-top:4px">Loja + ML</span></div></div>
-    <div class="list-item"><div class="avatar amber">⚙️</div><div class="body"><div class="t1">Pinhão / coroa 3/8"</div><div class="t2 num">SKU 100733 · 15 un</div></div><div class="end"><div class="val num">R$ 42</div><span class="chip chip-green" style="margin-top:4px">Loja + ML</span></div></div>
-    <div class="list-item"><div class="avatar amber">🗡️</div><div class="body"><div class="t1">Sabre / barra guia 18"</div><div class="t2 num">SKU 100150 · 5 un</div></div><div class="end"><div class="val num">R$ 140</div><span class="chip chip-warn" style="margin-top:4px">estoque baixo</span></div></div>
-    <div class="list-item"><div class="avatar amber">🔌</div><div class="body"><div class="t1">Vela de ignição NGK</div><div class="t2 num">SKU 100388 · 40 un</div></div><div class="end"><div class="val num">R$ 28</div><span class="chip chip-green" style="margin-top:4px">Loja + ML</span></div></div>
+    <button class="btn btn-primary" style="margin-bottom:var(--space-4)" onclick="nav('dispProdutoEdit')"><span class="ic">＋</span> Novo produto</button>
 
-    <button class="btn btn-ghost mt4"><span class="ic">＋</span> Novo produto (grava no Protheus)</button>
+    <div class="list-item" onclick="nav('dispProdutoEdit')"><div class="avatar amber">🔗</div><div class="body"><div class="t1">Corrente Husqvarna H30 · 18"</div><div class="t2 num">SKU 100245 · 12 un · R$ 95</div></div><span class="chip chip-green">Loja + ML</span><span class="chev">›</span></div>
+    <div class="list-item" onclick="nav('dispProdutoEdit')"><div class="avatar amber">⚙️</div><div class="body"><div class="t1">Pinhão / coroa 3/8"</div><div class="t2 num">SKU 100733 · 15 un · R$ 42</div></div><span class="chip chip-green">Loja + ML</span><span class="chev">›</span></div>
+    <div class="list-item" onclick="nav('dispProdutoEdit')"><div class="avatar amber">🗡️</div><div class="body"><div class="t1">Sabre / barra guia 18"</div><div class="t2 num">SKU 100150 · 5 un · R$ 140</div></div><span class="chip chip-warn">estoque baixo</span><span class="chev">›</span></div>
+    <div class="list-item" onclick="nav('dispProdutoEdit')"><div class="avatar amber">🔌</div><div class="body"><div class="t1">Vela de ignição NGK</div><div class="t2 num">SKU 100388 · 40 un · R$ 28</div></div><span class="chip chip-green">Loja + ML</span><span class="chev">›</span></div>
+    <div class="list-item" onclick="nav('dispProdutoEdit')"><div class="avatar amber">🌀</div><div class="body"><div class="t1">Filtro de ar roçadeira FS</div><div class="t2 num">SKU 100512 · 8 un · R$ 34</div></div><span class="chip chip-muted">só ML</span><span class="chev">›</span></div>
   </section>
 
   <!-- ===== DISPACE · CLIENTES MECÂNICOS ===== -->
   <section class="screen" data-screen="dispClientes">
-    <h1 class="page">Clientes mecânicos</h1>
+    <h1 class="page">Clientes</h1>
     <p class="page-sub">Quem compra peça e emite nota pela Dispace</p>
-    <div class="field" style="margin-bottom:var(--space-4)"><input type="text" placeholder="🔍 Buscar mecânico..."></div>
-    <div class="list-item"><div class="avatar">👷</div><div class="body"><div class="t1">Zé Mecânica</div><div class="t2">MEI · 3 peças no ponto de troca</div></div><span class="chip chip-warn">recompra</span><span class="chev">›</span></div>
-    <div class="list-item"><div class="avatar">🧑‍🔧</div><div class="body"><div class="t1">Oficina do Carlos</div><div class="t2">ME · 2 peças no ponto de troca</div></div><span class="chip chip-warn">recompra</span><span class="chev">›</span></div>
-    <div class="list-item"><div class="avatar">👨‍🔧</div><div class="body"><div class="t1">Antônio (Tonho)</div><div class="t2">MEI · 1 peça vencida</div></div><span class="chip chip-danger">urgente</span><span class="chev">›</span></div>
-    <div class="list-item"><div class="avatar">🧑‍🔧</div><div class="body"><div class="t1">Marcos Ferragens</div><div class="t2">ME · em dia</div></div><span class="chev">›</span></div>
+    <div class="field" style="margin-bottom:var(--space-4)"><input type="text" placeholder="🔍 Buscar cliente..."></div>
+    <div class="list-item" onclick="nav('dispRadar')"><div class="avatar">👷</div><div class="body"><div class="t1">Seu Zé</div><div class="t2">MEI · 3 peças no ponto de troca</div></div><span class="chip chip-warn">recompra</span><span class="chev">›</span></div>
+    <div class="list-item" onclick="nav('dispRadar')"><div class="avatar">🧑‍🔧</div><div class="body"><div class="t1">Oficina do Carlos</div><div class="t2">ME · 2 peças no ponto de troca</div></div><span class="chip chip-warn">recompra</span><span class="chev">›</span></div>
+    <div class="list-item" onclick="nav('dispRadar')"><div class="avatar">👨‍🔧</div><div class="body"><div class="t1">Antônio (Tonho)</div><div class="t2">MEI · 1 peça vencida</div></div><span class="chip chip-danger">urgente</span><span class="chev">›</span></div>
+    <div class="list-item" onclick="nav('dispRadar')"><div class="avatar">🧑‍🔧</div><div class="body"><div class="t1">Marcos Ferragens</div><div class="t2">ME · em dia</div></div><span class="chev">›</span></div>
+  </section>
+
+  <!-- ===== DISPACE · EDITAR PRODUTO ===== -->
+  <section class="screen no-nav" data-screen="dispProdutoEdit">
+    <h1 class="page">Editar produto</h1>
+    <p class="page-sub">Grava no Protheus e atualiza loja + Mercado Livre</p>
+
+    <div class="field"><label>Nome do produto</label><input type="text" value="Corrente Husqvarna H30 · 18&quot;"></div>
+    <div class="btn-row">
+      <div class="field" style="flex:1"><label>SKU (Protheus)</label><input type="text" value="100245"></div>
+      <div class="field" style="flex:1"><label>Preço (R$)</label><input type="text" value="95,00" inputmode="numeric"></div>
+    </div>
+    <div class="btn-row">
+      <div class="field" style="flex:1"><label>Estoque</label><input type="text" value="12" inputmode="numeric"></div>
+      <div class="field" style="flex:1"><label>Categoria</label><input type="text" value="Peça de desgaste"></div>
+    </div>
+    <div class="field"><label>Vida útil estimada (pro radar)</label><input type="text" value="1 corrente ≈ 90 dias de uso médio"></div>
+    <div class="field"><label>Canais de venda</label>
+      <div class="choice selected"><span class="ic">🛒</span><div class="body"><div class="t">Loja própria Dispace</div><div class="s">Vende no site do cliente</div></div><span class="mark">✓</span></div>
+      <div class="choice selected"><span class="ic">📦</span><div class="body"><div class="t">Mercado Livre</div><div class="s">Mantém o anúncio no marketplace</div></div><span class="mark">✓</span></div>
+    </div>
+
+    <div class="action-bar">
+      <button class="btn btn-primary" onclick="nav('dispProdutos')"><span class="ic">✓</span> Salvar no Protheus</button>
+      <button class="btn btn-ghost mt4" onclick="goBack()">Cancelar</button>
+    </div>
+  </section>
+
+  <!-- ===== DISPACE · PEDIDOS ===== -->
+  <section class="screen" data-screen="dispPedidos">
+    <h1 class="page">Pedidos</h1>
+    <p class="page-sub">Compras dos clientes · sincroniza com o Protheus</p>
+    <div style="margin-bottom:var(--space-4)"><span class="sync-chip"><span class="dot"></span> Nota fiscal automática pelo Protheus</span></div>
+
+    <div class="tabs">
+      <button class="active" onclick="switchTab(this,'ped-abertos')">Em aberto</button>
+      <button onclick="switchTab(this,'ped-enviados')">Enviados</button>
+    </div>
+
+    <div data-tab="ped-abertos">
+      <div class="list-item"><div class="avatar amber">🧾</div><div class="body"><div class="t1">Seu Zé · #4471</div><div class="t2">Corrente H30 (troca do radar) · hoje</div></div><div class="end"><div class="val num">R$ 95</div><span class="chip chip-warn" style="margin-top:4px">separar</span></div></div>
+      <div class="list-item"><div class="avatar amber">🧾</div><div class="body"><div class="t1">Oficina do Carlos · #4470</div><div class="t2">Pinhão + sabre · hoje</div></div><div class="end"><div class="val num">R$ 182</div><span class="chip chip-warn" style="margin-top:4px">separar</span></div></div>
+      <div class="list-item"><div class="avatar amber">🧾</div><div class="body"><div class="t1">Marcos Ferragens · #4468</div><div class="t2">Óleo 2T (x10) · ontem</div></div><div class="end"><div class="val num">R$ 220</div><span class="chip chip-info" style="margin-top:4px">faturar</span></div></div>
+    </div>
+    <div data-tab="ped-enviados" style="display:none">
+      <div class="list-item"><div class="avatar">📦</div><div class="body"><div class="t1">Seu Zé · #4460</div><div class="t2">NF-e emitida · a caminho</div></div><div class="end"><div class="val num">R$ 410</div><span class="chip chip-green" style="margin-top:4px">enviado</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===== DISPACE · MURAL (PUBLICAR) ===== -->
+  <section class="screen" data-screen="dispMural">
+    <h1 class="page">Mural</h1>
+    <p class="page-sub">Publique ofertas e novidades pros clientes</p>
+    <button class="btn btn-primary" style="margin-bottom:var(--space-5)"><span class="ic">＋</span> Novo comunicado</button>
+
+    <div class="post">
+      <div class="cover amber">Promoção: correntes com 20% OFF</div>
+      <div class="pbody">
+        <div class="who"><span>👁️</span> 128 clientes viram · 14 abriram a loja</div>
+        <div class="list-item" style="margin-bottom:var(--space-3)"><div class="avatar amber">🔗</div><div class="body"><div class="t1">Produto vinculado</div><div class="t2 num">Corrente H30 · SKU 100245</div></div><span class="chip chip-green">ativo</span></div>
+        <div class="btn-row"><button class="btn btn-ghost" style="flex:1"><span class="ic">✏️</span> Editar</button><button class="btn btn-ghost" style="flex:1"><span class="ic">🔗</span> Trocar produto</button></div>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="cover">Chegou: robô Automower 2026</div>
+      <div class="pbody">
+        <div class="who"><span>👁️</span> 96 clientes viram · 9 abriram a loja</div>
+        <div class="btn-row"><button class="btn btn-ghost" style="flex:1"><span class="ic">✏️</span> Editar</button><button class="btn btn-primary" style="flex:1" onclick="nav('dispProdutos')"><span class="ic">🔗</span> Vincular produto</button></div>
+      </div>
+    </div>
   </section>
 
   </div><!-- /screen-wrap -->
 
   <!-- ===================== BOTTOM NAV ===================== -->
   <nav class="bottomnav" id="bottomnav">
-    <!-- mecânico -->
+    <!-- mecânico (cliente) -->
     <button data-mode-nav="mec" data-navfor="home" class="active" onclick="nav('home')"><span class="ic">🏠</span> Início</button>
     <button data-mode-nav="mec" data-navfor="notas" onclick="nav('notas')"><span class="ic">📂</span> Notas</button>
     <div class="fab-slot" data-mode-nav="mec"><button class="fab" onclick="nav('emitirTipo')" aria-label="Emitir nota"><span class="ic">＋</span></button><span class="fab-label">Emitir</span></div>
-    <button data-mode-nav="mec" data-navfor="manutencao" onclick="nav('manutencao')"><span class="ic">🔧</span> Manut.</button>
     <button data-mode-nav="mec" data-navfor="loja" onclick="nav('loja')"><span class="ic">🛒</span> Loja</button>
-    <!-- Dispace comercial -->
+    <button data-mode-nav="mec" data-navfor="mural" onclick="nav('mural')"><span class="ic">📣</span> Mural</button>
+    <!-- Dispace (admin + comercial) -->
     <button data-mode-nav="disp" data-navfor="dispHome" onclick="nav('dispHome')"><span class="ic">📊</span> Painel</button>
     <button data-mode-nav="disp" data-navfor="dispRadar" onclick="nav('dispRadar')"><span class="ic">🛰️</span> Radar</button>
-    <button data-mode-nav="disp" data-navfor="dispCatalogo" onclick="nav('dispCatalogo')"><span class="ic">📦</span> Catálogo</button>
+    <button data-mode-nav="disp" data-navfor="dispProdutos" onclick="nav('dispProdutos')"><span class="ic">📦</span> Produtos</button>
+    <button data-mode-nav="disp" data-navfor="dispPedidos" onclick="nav('dispPedidos')"><span class="ic">🧾</span> Pedidos</button>
     <button data-mode-nav="disp" data-navfor="dispClientes" onclick="nav('dispClientes')"><span class="ic">🧑‍🔧</span> Clientes</button>
   </nav>
 
@@ -925,17 +960,18 @@ const SCREENS = {
   notas:        { nav:true,  back:false, title:'Notas' },
   clientes:     { nav:true,  back:false, title:'Clientes' },
   clienteDetalhe:{nav:true,  back:true,  title:'Cliente' },
-  manutencao:   { nav:true,  back:false, title:'Manutenção' },
-  loja:         { nav:true,  back:false, title:'Loja' },
+  loja:         { nav:true,  back:false, title:'Loja Dispace' },
   mural:        { nav:true,  back:true,  title:'Mural' },
   notificacoes: { nav:true,  back:true,  title:'Avisos' },
-  // ---- lado Dispace comercial ----
-  dispHome:     { nav:true,  back:false, title:'Painel' },
-  dispRadar:    { nav:true,  back:false, title:'Radar de vida útil' },
-  dispCatalogo: { nav:true,  back:false, title:'Catálogo' },
-  dispClientes: { nav:true,  back:false, title:'Clientes' },
+  // ---- lado Dispace (admin + comercial) ----
+  dispHome:       { nav:true,  back:false, title:'Painel' },
+  dispRadar:      { nav:true,  back:false, title:'Radar de vida útil' },
+  dispProdutos:   { nav:true,  back:false, title:'Produtos' },
+  dispProdutoEdit:{ nav:false, back:true,  title:'Editar produto' },
+  dispPedidos:    { nav:true,  back:false, title:'Pedidos' },
+  dispClientes:   { nav:true,  back:false, title:'Clientes' },
+  dispMural:      { nav:true,  back:false, title:'Mural' },
 };
-const NAV_FOR = ['home','notas','manutencao','loja'];
 let history = ['login'];
 
 function nav(name, push = true) {
@@ -969,7 +1005,8 @@ function goBack() {
   else { nav('home', false); }
 }
 
-function login() { setMode('mec'); history = ['home']; nav('home', false); }
+/* entra pelo lado escolhido no login (Dispace ou mecânico) */
+function enter(mode) { setMode(mode); history = [mode === 'mec' ? 'home' : 'dispHome']; }
 
 /* alterna entre lado do mecânico e lado da Dispace comercial */
 function setMode(mode) {
